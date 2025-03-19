@@ -1,8 +1,14 @@
 fn main() {
-    //second();
-    //booleans();
-    //mean();
-    arrays_and_lists();
+    /*
+        second();
+        booleans();
+        mean();
+        arrays_and_lists();
+        let celsius = 23.0;
+        let recived_temp = challenge2(celsius);
+        assert_eq!(recived_temp, 73.4);
+        println!("your output temperature was {}", recived_temp);
+    */
 }
 
 /*functions with strings and numbers.*/
@@ -68,11 +74,26 @@ fn arrays_and_lists() {
     //tuples multiple items of mixed datatypes
     //elements are ordered
     //stored in a fixed-length, contiguous section memory
-    let mut stuff: (u8,f64,char)= (10, 3.13, 'x');
-    let stuff.1 += 3.0; //takes the second element, adds 3 to it and brings it back into the tuple.
+    let mut stuff: (u8, f64, char) = (10, 3.13, 'x');
     let first_item = stuff.0;
-    println!("first_item from the tuple is {}", first_item);
+    println!(
+        "first_item from the tuple is: {}, the second item is: {} and the third is: {}",
+        first_item, stuff.1, stuff.2
+    );
+    stuff.1 += 3.0; //takes the second element, adds 3 to it and brings it back into the tuple.
 
     let (a, b, c) = stuff; //this assigns values from the tuples to a, b, c
-    println!("b is {}", b)
+    println!(
+        " a = {}, b is now the element from stuff.1 + 3 = {} and c = {}",
+        a, b, c
+    )
+}
+/* convert from Celsius to Fahrenheit */
+fn challenge2(celsius: f64) -> f64 {
+    let fahrenheit = (celsius * 1.8) + 32.0;
+    println!(
+        "recived Temperature in C° is {}. The returned temperature in F° is {}",
+        celsius, fahrenheit
+    );
+    fahrenheit
 }
