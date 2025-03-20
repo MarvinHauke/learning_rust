@@ -8,10 +8,12 @@ fn main() {
         let recived_temp = challenge2(celsius);
         assert_eq!(recived_temp, 73.4);
         println!("your output temperature was {}", recived_temp);
+        forloop_test();
     */
+    challenge3();
 }
 
-/*functions with strings and numbers.*/
+/*functions with strings and numbers */
 fn second() {
     let mut x: u8 = 245;
     println!("x is {}", x);
@@ -43,7 +45,7 @@ fn booleans() {
     //let letter = '1';
 }
 
-/*First challenge*/
+/*First challenge */
 fn mean() {
     let a = 13;
     let b = 2.3;
@@ -55,7 +57,7 @@ fn mean() {
     println!("Test passed! the answer is {}", average);
 }
 
-/*Here i try to use functions in Rust*/
+/*Here i try to use functions in Rust */
 fn arrays_and_lists() {
     let parking_lot = [[1, 2, 3], [4, 5, 6]];
     let number = parking_lot[0][1];
@@ -88,6 +90,7 @@ fn arrays_and_lists() {
         a, b, c
     )
 }
+
 /* convert from Celsius to Fahrenheit */
 fn challenge2(celsius: f64) -> f64 {
     let fahrenheit = (celsius * 1.8) + 32.0;
@@ -96,4 +99,57 @@ fn challenge2(celsius: f64) -> f64 {
         celsius, fahrenheit
     );
     fahrenheit
+}
+
+/* loops can return a value*/
+//fn loop_test() {
+//    let value = loop{}
+//}
+
+/* while loops don´t return a value!!! */
+//fn whileloop_test() {}
+
+/* For loops are not that simple in rust. However in patch 1.53 there was a change which made it easier*/
+fn forloop_test() {
+    let message = ['h', 'e', 'l', 'l', 'o'];
+
+    //e has is only a `&char which means in a for loop its only a reference to the array. (aka
+    //pointer to the value) You cant simply check for 'e' it has to be dereferenced!
+    for (index, &item) in message.iter().enumerate() {
+        println!("item {} is {}", index, item);
+        if item == 'e' {
+            break;
+        }
+    }
+
+    //this is a range:
+    for number in 0..5 {
+        println!("number is {}", number);
+    }
+}
+
+/* Challenge 3 */
+fn challenge3() {
+    let numbers = [1, 9, -2, 0, 23, 20, -7, 13, 37, 20, 56, -18, 20, 3];
+    let mut max: i32;
+    let mut min: i32;
+    let mut mean: f64;
+
+    min = numbers[0];
+    max = numbers[0];
+    mean = 0.0;
+    for number in numbers {
+        if number < min {
+            min = number;
+        } else if number > max {
+            max = number;
+        }
+        mean += number as f64;
+    }
+    mean /= numbers.len() as f64;
+
+    assert_eq!(max, 56);
+    assert_eq!(min, -18);
+    assert_eq!(mean, 12.5);
+    println!("Test passed!");
 }
