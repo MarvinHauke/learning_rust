@@ -26,24 +26,46 @@ fn main() {
 // 4. Repeat steps 2 and 3 until the user guesses correctly
 
 fn challenge5() {
-    let number = rand::random_range(1..101);
-    let mut input = String::new();
-    let guessed_number: i32;
-    println!("please enter a number: ");
-    io::stdin().read_line(&mut input);
-    guessed_number = input.trim().parse::<i32>().unwrap();
-    while true {
-        if number == guessed_number {
-            println!("Bravo you guessed corret! 🥳");
+    /*this was my solution:
+        let number = rand::random_range(1..101);
+        let mut input = String::new();
+        loop {
+            println!("please enter a number: ");
+            io::stdin().read_line(&mut input); // <-- "let _" is for throwing away the result.
+            let guessed_number = input.trim().parse::<u32>().unwrap();
+            if number == guessed_number {
+                println!("Bravo you guessed corret! 🥳");
+                break;
+            } else if guessed_number > number {
+                println!("Your guess was too big");
+            } else if guessed_number < number {
+                println!("Your guess was too small");
+            }
+            input.clear();
+        }
+        println!("the number of the computer is {number} the input was {input}");
+    */
+    //Course solution:
+
+    let secret_number = rand::random_range(1..101);
+    println!("I'm thinking of a number between 1 an 100...");
+    println!("Guess the number:");
+    loop {
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read input line."); // expect() is simular too unwrap()
+        let guess: u32 = guess.trim().parse().expect("Failed to parse the guess.");
+
+        if guess > secret_number {
+            println!("\n{} is too high! Guess lower:", guess);
+        } else if guess < secret_number {
+            println!("\n{} is too low! Guess higher:", guess);
+        } else {
+            println!("\nYou got it! The secret number was {}.", guess);
             break;
-        } else if guessed_number > number {
-            println!("Your guess was too big");
-        } else if guessed_number < number {
-            println!("Your guess was too small");
         }
     }
-
-    println!("the number of the computer is {number} the input was {input}");
 }
 
 /* Modules */
