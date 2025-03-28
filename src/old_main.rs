@@ -8,6 +8,8 @@ use std::io;
 
 
 fn ols_main() {
+    ////blabla
+    //blabla
     /* all old challenges
         challenge5();
         random_number();
