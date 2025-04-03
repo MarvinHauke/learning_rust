@@ -1,9 +1,21 @@
-//This is about lifetimes in rust.
-//Lifetime Elision Rules:
-// 1. Each input prameter that is a reference is assigned its own lifetime
-//      fn foo <'a>(x:&'a str, y:i32) -> & str{}
-// 2. If there is exactly one input lifetime, assign it to all output lifetimes
-//      fn foo <'a>(x:&'a str) -> &'a str{}
-// 3. if there is a &self or &mut self input parameter, its lifetime will be assigned to all output
-//    lifetimes.
-fn main() {}
+fn main() {
+    let mut astronauts: Vec<String> = Vec::new();
+    astronauts.push(String::from("Shepard"));
+    astronauts.push(String::from("Grissom"));
+    astronauts.push(String::from("Glenn"));
+    println!("astronaut is {:?}", astronauts);
+
+    //removing the last astronaut
+    let last = astronauts.pop();
+    println!("last is {:?}", last);
+
+    //print third astronaut this is not reachable anymore because we "popped" it
+    //let third = &astronauts[2];
+    //this is a safer variant to call it. ther will be a "None" value returned
+    let third = astronauts.get(2);
+    println!("third is {:?}", third);
+
+    //this is the vecmacro for prepoulating a new vector with values
+    //datatypes are also not needed to specify
+    let countdown = vec![5, 4, 3, 2, 1];
+}
